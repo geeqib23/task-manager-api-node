@@ -1,16 +1,27 @@
 const mongoose = require("mongoose")
 
-const Task = mongoose.model("task", {
-  //mongoose automatically creates a collection with lowecase and pluralised
-  name: {
-    type: String,
-    required: true,
-    trim: true,
+const TaskSchema = new mongoose.Schema(
+  {
+    //mongoose automatically creates a collection with lowecase and pluralised
+    name: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    status: {
+      type: Boolean,
+    },
+    owner: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: "User",
+    },
   },
-  status: {
-    type: Boolean,
-  },
-  owner: {},
-})
+  {
+    timestamps: true,
+  }
+)
+
+const Task = mongoose.model("Task", TaskSchema)
 
 module.exports = Task

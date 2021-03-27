@@ -62,7 +62,6 @@ UserRouter.patch("/users/me", auth, async (req, res) => {
   if (updateFields.filter((update) => !validFields.includes(update)).length != 0) {
     res.status(400).send("Invalid update")
   }
-  const _id = req.params.id //req params
   try {
     updateFields.forEach((update) => (req.user[update] = req.body[update]))
     await req.user.save()
